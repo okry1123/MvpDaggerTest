@@ -13,6 +13,8 @@ public class ChinaWeatherCenter implements IWeatherCenter {
     private Thread mMonitorThread;
     private boolean mIsRunning;
 
+    byte[] meaninglessHugeMemory = new byte[2 * 1024 * 1024];
+
     ChinaWeatherCenter() {
         Log.d("initial", "ChinaWeatherCenter initial");
     }
