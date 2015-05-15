@@ -2,8 +2,7 @@ package com.okry.mvpdaggertest.weather;
 
 import android.os.Handler;
 import android.os.Looper;
-
-import javax.inject.Inject;
+import android.util.Log;
 
 /**
  * Created by mr on 15/5/8.
@@ -14,10 +13,11 @@ public class ChinaWeatherCenter implements IWeatherCenter {
     private Thread mMonitorThread;
     private boolean mIsRunning;
 
-    ChinaWeatherCenter(){
-
+    ChinaWeatherCenter() {
+        Log.d("initial", "ChinaWeatherCenter initial");
     }
 
+    @Override
     public void startMonitoring() {
         if(mMonitorThread == null || !mMonitorThread.isAlive() || !mIsRunning) {
             mIsRunning = true;
@@ -26,8 +26,9 @@ public class ChinaWeatherCenter implements IWeatherCenter {
         }
     }
 
+    @Override
     public void stopMonitoring() {
-
+        mIsRunning = false;
     }
 
     @Override
@@ -46,12 +47,8 @@ public class ChinaWeatherCenter implements IWeatherCenter {
     }
 
     @Override
-    public int getHumidity() {
-        return 0;
-    }
-
-    public interface OnWeatherChangeListener {
-        public void onWeatherChange();
+    public String getHumidity() {
+        return this.toString();
     }
 
     public void setOnWeatherChangeListener(OnWeatherChangeListener listener) {

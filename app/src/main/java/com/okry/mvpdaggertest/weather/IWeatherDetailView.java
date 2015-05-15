@@ -5,7 +5,7 @@ import com.okry.mvpdaggertest.mvp.MvpView;
 /**
  * Created by mr on 15/5/8.
  */
-public interface IWeatherView extends MvpView{
+public interface IWeatherDetailView extends MvpView {
 
     public void showTemp(int temp);
 

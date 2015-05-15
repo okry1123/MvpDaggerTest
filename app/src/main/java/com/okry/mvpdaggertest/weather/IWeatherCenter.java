@@ -13,6 +13,16 @@ public interface IWeatherCenter extends MvpModel {
 
     public int getCloudValue();
 
-    public int getHumidity();
+    public String getHumidity();
+
+    public void setOnWeatherChangeListener(OnWeatherChangeListener listener);
+
+    public void startMonitoring();
+
+    public void stopMonitoring();
+
+    public interface OnWeatherChangeListener {
+        public void onWeatherChange();
+    }
 
 }

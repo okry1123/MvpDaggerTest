@@ -5,19 +5,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.okry.mvpdaggertest.R;
 
+import javax.inject.Inject;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import dagger.ObjectGraph;
 
 /**
  * Created by mr on 15/5/8.
  */
-public class WeatherFragment extends Fragment implements IWeatherView {
+public class WeatherFragment extends Fragment implements IWeatherDetailView, IWeatherSimpleView {
 
     @InjectView(R.id.temp_value)
     TextView tempView;
@@ -25,13 +27,18 @@ public class WeatherFragment extends Fragment implements IWeatherView {
     TextView cloudView;
     @InjectView(R.id.humidity_value)
     TextView humidityView;
+    @InjectView(R.id.simple_text)
+    TextView simpleView;
 
+    @Inject
     IWeatherPresenter mPresenter;
+    @Inject
+    SimpleWeatherPresenter mSimpleWeatherPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPresenter = new BaseWeatherPresenter();
+        ObjectGraph.create(PresenterModule.class).inject(this);
     }
 
     @Override
@@ -39,6 +46,7 @@ public class WeatherFragment extends Fragment implements IWeatherView {
         View view = inflater.inflate(R.layout.activity_main, null);
         ButterKnife.inject(this, view);
         mPresenter.attachView(this);
+        mSimpleWeatherPresenter.attachView(this);
         return view;
     }
 
@@ -46,6 +54,7 @@ public class WeatherFragment extends Fragment implements IWeatherView {
     public void onDestroyView() {
         mPresenter.detachView();
         mPresenter.stopWeatherDetect();
+        mSimpleWeatherPresenter.detachView();
         super.onDestroyView();
     }
 
@@ -75,4 +84,8 @@ public class WeatherFragment extends Fragment implements IWeatherView {
         mPresenter.startWeatherDetect();
     }
 
+    @Override
+    public void showSimpleWeather(String text) {
+        simpleView.setText(text);
+    }
 }
