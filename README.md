@@ -1,5 +1,5 @@
 # MvpDaggerTest
-A Weather board sample App with MVP structure and use Dagger for dependency injection.
+A sample App with MVP structure and use Dagger for dependency injection.
 
 # Branches
 -Branch master is a base MVP app without using Dagger.
