@@ -8,8 +8,7 @@ import dagger.Provides;
 /**
  * Created by mr on 15/5/14.
  */
-@Module(complete = false,
-        library = true)
+@Module
 public class ModelModule {
 
     @Provides

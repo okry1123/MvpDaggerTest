@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import dagger.ObjectGraph;
 
 /**
  * Created by mr on 15/5/8.
@@ -38,7 +37,8 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ObjectGraph.create(PresenterModule.class).inject(this);
+        DaggerWeatherComponent.create().inject(this);
+        mPresenter.toString();
     }
 
     @Override
@@ -54,7 +54,6 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
     public void onDestroyView() {
         mPresenter.detachView();
         mPresenter.stopWeatherDetect();
-        mSimpleWeatherPresenter.detachView();
         super.onDestroyView();
     }
 
