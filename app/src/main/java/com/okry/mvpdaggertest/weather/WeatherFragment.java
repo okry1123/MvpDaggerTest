@@ -38,7 +38,6 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DaggerWeatherComponent.create().inject(this);
-        mPresenter.toString();
     }
 
     @Override
