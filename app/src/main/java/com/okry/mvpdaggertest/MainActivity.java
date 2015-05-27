@@ -1,25 +1,30 @@
 package com.okry.mvpdaggertest;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.view.View;
-import android.widget.Button;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Button b = new Button(this);
-        b.setOnClickListener(this);
-        b.setText("Click Goto Weather Board");
-        setContentView(b);
+        setContentView(R.layout.main_content);
+        ButterKnife.inject(this);
     }
 
-    @Override
-    public void onClick(View view) {
+    @OnClick(R.id.b1)
+    public void gotoBoard() {
         Intent i = new Intent(this, WeatherBoardActivity.class);
+        startActivity(i);
+    }
+
+    @OnClick(R.id.b2)
+    public void gotoList() {
+        Intent i = new Intent(this, WeatherListActivity.class);
         startActivity(i);
     }
 }

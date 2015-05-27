@@ -64,6 +64,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"/>
 
-
+    <Button
+        android:layout_alignParentBottom="true"
+        android:id="@+id/go_to_list"
+        android:text="Go to list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

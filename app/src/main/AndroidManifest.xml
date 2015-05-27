@@ -21,6 +21,10 @@
             android:name=".WeatherBoardActivity"
             android:label="Weather">
         </activity>
+        <activity
+            android:name=".WeatherListActivity"
+            android:label="WeatherList">
+        </activity>
     </application>
 
 </manifest>

@@ -4,6 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mr on 15/5/8.
  */
@@ -13,7 +16,7 @@ public class ChinaWeatherCenter implements IWeatherCenter {
     private Thread mMonitorThread;
     private boolean mIsRunning;
 
-    byte[] meaninglessHugeMemory = new byte[2 * 1024 * 1024];
+    private byte[] meaninglessHugeMemory = new byte[2 * 1024 * 1024];
 
     ChinaWeatherCenter() {
         Log.d("initial", "ChinaWeatherCenter initial");
@@ -31,6 +34,17 @@ public class ChinaWeatherCenter implements IWeatherCenter {
     @Override
     public void stopMonitoring() {
         mIsRunning = false;
+    }
+
+    @Override
+    public List<Integer> getNextTemp() {
+        int next = 24;
+        List<Integer> nextTemp = new ArrayList<>();
+        for (int i = 0; i < next; i++) {
+            int temp = (int) (Math.random() * 30);
+            nextTemp.add(temp);
+        }
+        return nextTemp;
     }
 
     @Override

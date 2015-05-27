@@ -1,6 +1,7 @@
 package com.okry.mvpdaggertest.weather;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.okry.mvpdaggertest.R;
+import com.okry.mvpdaggertest.WeatherListActivity;
 
 import javax.inject.Inject;
 
@@ -42,7 +44,7 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_main, null);
+        View view = inflater.inflate(R.layout.fragment_weather_board, null);
         ButterKnife.inject(this, view);
         mPresenter.attachView(this);
         mSimpleWeatherPresenter.attachView(this);
@@ -80,6 +82,12 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
     @OnClick(R.id.start)
     void start() {
         mPresenter.startWeatherDetect();
+    }
+
+    @OnClick(R.id.go_to_list)
+    void gotoWeatherList() {
+        Intent i = new Intent(getActivity(), WeatherListActivity.class);
+        startActivity(i);
     }
 
     @Override
