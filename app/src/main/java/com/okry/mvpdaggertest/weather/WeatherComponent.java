@@ -1,5 +1,7 @@
 package com.okry.mvpdaggertest.weather;
 
+import com.okry.mvpdaggertest.daggermodule.PresenterModule;
+
 import javax.inject.Singleton;
 
 import dagger.Component;

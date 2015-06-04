@@ -1,4 +1,7 @@
-package com.okry.mvpdaggertest.weather;
+package com.okry.mvpdaggertest.daggermodule;
+
+import com.okry.mvpdaggertest.weather.ChinaWeatherCenter;
+import com.okry.mvpdaggertest.weather.IWeatherCenter;
 
 import javax.inject.Singleton;
 

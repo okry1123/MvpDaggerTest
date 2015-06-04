@@ -18,7 +18,7 @@ import butterknife.OnClick;
 /**
  * Created by mr on 15/5/8.
  */
-public class WeatherFragment extends Fragment implements IWeatherDetailView, IWeatherSimpleView {
+public class WeatherFragment extends Fragment implements IWeatherView {
 
     @InjectView(R.id.temp_value)
     TextView tempView;
@@ -31,13 +31,11 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
 
     @Inject
     IWeatherPresenter mPresenter;
-    @Inject
-    SimpleWeatherPresenter mSimpleWeatherPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DaggerWeatherComponent.create().inject(this);
+        DaggerWeatherComponent.builder().build().inject(this);
     }
 
     @Override
@@ -45,7 +43,6 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
         View view = inflater.inflate(R.layout.activity_main, null);
         ButterKnife.inject(this, view);
         mPresenter.attachView(this);
-        mSimpleWeatherPresenter.attachView(this);
         return view;
     }
 
@@ -82,8 +79,4 @@ public class WeatherFragment extends Fragment implements IWeatherDetailView, IWe
         mPresenter.startWeatherDetect();
     }
 
-    @Override
-    public void showSimpleWeather(String text) {
-        simpleView.setText(text);
-    }
 }

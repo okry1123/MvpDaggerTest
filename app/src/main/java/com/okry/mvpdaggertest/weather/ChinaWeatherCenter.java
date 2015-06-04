@@ -15,7 +15,7 @@ public class ChinaWeatherCenter implements IWeatherCenter {
 
     byte[] meaninglessHugeMemory = new byte[2 * 1024 * 1024];
 
-    ChinaWeatherCenter() {
+    public ChinaWeatherCenter() {
         Log.d("initial", "ChinaWeatherCenter initial");
     }
 

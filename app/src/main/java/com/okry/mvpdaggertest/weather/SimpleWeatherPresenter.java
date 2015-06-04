@@ -2,34 +2,54 @@ package com.okry.mvpdaggertest.weather;
 
 import android.util.Log;
 
-import com.okry.mvpdaggertest.mvp.MvpPresenter;
 import com.okry.mvpdaggertest.mvp.MvpView;
+import com.okry.mvpdaggertest.weather.IWeatherCenter.OnWeatherChangeListener;
 
 import javax.inject.Inject;
 
 /**
- * Created by mr on 15/5/14.
+ * Created by mr on 15/5/8.
  */
-public class SimpleWeatherPresenter implements MvpPresenter {
+public class SimpleWeatherPresenter implements IWeatherPresenter, OnWeatherChangeListener {
 
-    IWeatherSimpleView mView;
+    IWeatherView mWeatherView;
 
-    private final IWeatherCenter mWeatherCenter;
+    IWeatherCenter mWeatherCenter;
 
     @Inject
-    SimpleWeatherPresenter(IWeatherCenter weatherCenter) {
-        Log.d("initial", "SimpleWeatherPresenter initial");
+    public SimpleWeatherPresenter(IWeatherCenter weatherCenter) {
         mWeatherCenter = weatherCenter;
+        mWeatherCenter.setOnWeatherChangeListener(this);
+        Log.d("initial", "DetailWeatherPresenter initial");
+    }
+
+    @Override
+    public void onWeatherChange() {
+        if(mWeatherView != null) {
+            mWeatherView.showTemp(mWeatherCenter.getTemp());
+        }
     }
 
     @Override
     public void attachView(MvpView view) {
-        mView = (IWeatherSimpleView) view;
-        mView.showSimpleWeather("T:" + mWeatherCenter.getTemp() + ", H:" + mWeatherCenter.getHumidity());
+        mWeatherView = (IWeatherView) view;
+        mWeatherView.showTemp(mWeatherCenter.getTemp());
+        mWeatherView.showCloud(mWeatherCenter.getCloudDirection(), mWeatherCenter.getCloudValue());
+        mWeatherView.showHumidity("h" + mWeatherCenter.getHumidity());
     }
 
     @Override
     public void detachView() {
-        mView = null;
+        mWeatherView = null;
+    }
+
+    @Override
+    public void startWeatherDetect() {
+        mWeatherCenter.startMonitoring();
+    }
+
+    @Override
+    public void stopWeatherDetect() {
+        mWeatherCenter.stopMonitoring();
     }
 }
